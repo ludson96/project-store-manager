@@ -1,6 +1,5 @@
 const express = require('express');
-// const { productsRouter } = require('./routers');
-const productsController = require('./controllers/products.controller');
+const { productsRouter } = require('./routers');
 
 const app = express();
 app.use(express.json());
@@ -10,8 +9,7 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
-app.use('/products', productsController.findAll);
-// app.use('/sales', salesRouter);
+app.use('/products', productsRouter);
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
