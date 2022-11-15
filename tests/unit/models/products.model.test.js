@@ -5,7 +5,7 @@ const { productsModel } = require('../../../src/models');
 const connection = require('../../../src/models/connection');
 const { allProducts, payload } = require('./mocks/products.model.mock')
 
-describe('Testando o endpoint GET', function () {
+describe('Verificando camada model de Products', function () {
   afterEach(sinon.restore);
 
   it('Recuperando todos os produtos', async function () {

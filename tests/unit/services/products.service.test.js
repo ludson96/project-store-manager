@@ -5,7 +5,7 @@ const {productsService} = require('../../../src/services');
 
 const { allProducts, expected, payload } = require('./mocks/products.service.mock');
 
-describe('Verificando service Products', function () {
+describe('Verificando camdada service de Products', function () {
   afterEach(sinon.restore);
 
   it('Retornando todos os produtos', async function () {
