@@ -26,8 +26,19 @@ const insert = async (name) => {
   return camelize(insertId);
 };
 
+const updateById = async (name, id) => {
+  const [[result]] = await connection.execute(
+    `UPDATE products
+    SET name = ?
+    WHERE id = ?`,
+    [name, id],
+  );
+  return camelize(result);
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
+  updateById,
 };
