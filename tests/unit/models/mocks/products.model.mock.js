@@ -13,6 +13,9 @@ const allProducts = [
   }
 ]
 
+const payload = 1;
+
 module.exports = {
   allProducts,
+  payload,
 }
