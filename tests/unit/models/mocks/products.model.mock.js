@@ -15,7 +15,17 @@ const allProducts = [
 
 const payload = 1;
 
+const correctId = {
+  insertId: 4
+}
+
+const nameProduct = {
+  "name": "ProdutoX"
+}
+
 module.exports = {
   allProducts,
   payload,
+  correctId,
+  nameProduct,
 }

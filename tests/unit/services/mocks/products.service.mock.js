@@ -28,10 +28,26 @@ const expected = [
   }
 ]
 
+const correctId = {
+  insertId: 4
+}
+
+const nameProduct = {
+  "name": "ProdutoX"
+}
+
+const expectedInsert = {
+  "id": 4,
+  "name": "ProdutoX"
+};
+
 const payload = 1;
 
 module.exports = {
   allProducts,
   payload,
   expected,
+  correctId,
+  nameProduct,
+  expectedInsert,
 }

@@ -3,12 +3,12 @@ const sinon = require('sinon');
 const {productsModel} = require('../../../src/models');
 const {productsService} = require('../../../src/services');
 
-const { allProducts, expected, payload } = require('./mocks/products.service.mock');
+const { allProducts, expected, payload, correctId, nameProduct, expectedInsert } = require('./mocks/products.service.mock');
 
-describe('Verificando camdada service de Products', function () {
+describe('Teste de unidade da camdada service Products', function () {
   afterEach(sinon.restore);
 
-  it('Retornando todos os produtos', async function () {
+  it('Listando todos os produtos do DB', async function () {
     sinon.stub(productsModel, 'findAll').resolves(allProducts)
 
     const result = await productsService.findAll();
@@ -30,5 +30,15 @@ describe('Verificando camdada service de Products', function () {
     const result = await productsService.findById(4);
 
     expect(result.type).to.equal('Mensagem Service erro')
+  })
+
+  it('Adicionando um novo produto ao Database', async function () {
+    sinon.stub(productsModel, 'insert').resolves(correctId);
+    sinon.stub(productsModel, 'findById').resolves(expectedInsert)
+
+    const result = await productsService.insert(nameProduct);
+
+    expect(result.type).to.deep.equal(null);
+    expect(result.message).to.deep.equal(expectedInsert)
   })
 })
