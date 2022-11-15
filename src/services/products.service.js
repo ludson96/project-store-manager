@@ -11,7 +11,13 @@ const findById = async (id) => {
   return { type: 'Mensagem Service erro' };
 };
 
+const insert = async (name) => {
+  const result = await productsModel.insert(name);
+  return { type: null, message: result };
+};
+
 module.exports = {
   findAll,
   findById,
+  insert,
 };
