@@ -31,13 +31,23 @@ const updateById = async (name, id) => connection.execute(
     SET name = ?
     WHERE id = ?`,
     [name, id],
-  );
+);
   
 const deleteById = async (id) => connection.execute(
     `DELETE FROM StoreManager.products
   WHERE id = ?`,
     [id],
+);
+
+const search = async (q) => {
+  const pesquisa = `%${q}%`;
+  const [result] = await connection.execute(
+    `SELECT * FROM StoreManager.products
+  WHERE name like ?`,
+    [pesquisa],
   );
+  return camelize(result);
+};
 
 module.exports = {
   findAll,
@@ -45,4 +55,5 @@ module.exports = {
   insert,
   updateById,
   deleteById,
+  search,
 };

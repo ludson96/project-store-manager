@@ -35,10 +35,17 @@ const deleteById = async (req, res) => {
   return res.status(204).json({ message: 'Produto deletado com sucesso' });
 };
 
+const search = async (req, res) => {
+  const { q } = req.query;
+  const { message } = await productsService.search(q);
+  return res.status(200).json(message);
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
   updateById,
   deleteById,
+  search,
 };

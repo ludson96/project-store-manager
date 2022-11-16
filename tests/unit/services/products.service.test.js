@@ -85,4 +85,13 @@ describe('Teste de unidade da camdada service Products', function () {
       expect(result.message).to.deep.equal('id not found');
     });
   });
+
+  it('Pesquisando pelo nome do produto', async function () {
+    sinon.stub(productsModel, 'search').resolves(allProducts[0]);
+
+    const result = await productsService.search('Martelo');
+
+    expect(result.type).to.deep.equal(null);
+    expect(result.message).to.deep.equal(allProducts[0]);
+  });
 })

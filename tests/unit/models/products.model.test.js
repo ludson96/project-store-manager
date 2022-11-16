@@ -48,4 +48,12 @@ describe('Teste de unidade da camada model Products', function () {
     expect(result).to.deep.equal();
   })
 
+  it('Pesquisando pelo nome do produto', async function () {
+    sinon.stub(connection, 'execute').resolves([allProducts[0]])
+
+    const result = await productsModel.search('Martelo');
+
+    expect(result).to.deep.equal(allProducts[0]);
+  })
+
 });

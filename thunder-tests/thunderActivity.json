@@ -4,13 +4,19 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/products/2",
+    "url": "http://localhost:3000/products/search?q=Es",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-11-14T21:33:12.113Z",
-    "modified": "2022-11-16T15:16:33.892Z",
+    "modified": "2022-11-16T17:44:59.719Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "Es",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]

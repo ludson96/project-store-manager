@@ -144,4 +144,20 @@ describe('Teste de unidade da camada controller Products', function () {
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
     });
   });
+
+  it('Pesquisando pelo nome do produto', async function () {
+    const req = { query: 'Martelo' };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(productsService, 'search')
+      .resolves({ type: null, message: allProducts[0] });
+    
+    await productsController.search(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(allProducts[0])
+  });
 });
