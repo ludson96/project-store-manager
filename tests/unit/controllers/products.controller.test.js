@@ -110,4 +110,38 @@ describe('Teste de unidade da camada controller Products', function () {
       expect(res.json).to.have.been.calledWith({ message: 'Product not found' })
     });
   });
+
+  describe('Deletando um produto no DB', function () {
+    it('Com um id existente', async function () {
+      const req = { params: payload };
+      const res = {};
+  
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      
+      sinon.stub(productsService, 'deleteById')
+        .resolves({ type: null, message: 'Deletado com sucesso' });
+      
+      await productsController.deleteById(req, res);
+
+      expect(res.status).to.have.been.calledWith(204);
+      expect(res.json).to.have.been.calledWith({ message: 'Produto deletado com sucesso' })
+    });
+
+    it('Com um id inexistente', async function () {
+      const req = { params: 99999 };
+      const res = {};
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      sinon.stub(productsService, 'deleteById')
+        .resolves({ type: 'ID_NOT_FOUND', message: 'id not found' });
+      
+      await productsController.deleteById(req, res);
+
+      expect(res.status).to.have.been.calledWith(404);
+      expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+    });
+  });
 });

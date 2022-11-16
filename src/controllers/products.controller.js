@@ -32,7 +32,7 @@ const deleteById = async (req, res) => {
   const { id } = req.params;
   const { type } = await productsService.deleteById(id);
   if (type) return res.status(404).json({ message: 'Product not found' });
-  res.status(204).end();
+  return res.status(204).json({ message: 'Produto deletado com sucesso' });
 };
 
 module.exports = {

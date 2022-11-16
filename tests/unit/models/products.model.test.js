@@ -32,12 +32,20 @@ describe('Teste de unidade da camada model Products', function () {
     expect(result).to.deep.equal(4);
   });
   
-    it('Atualizando um produto no DB', async function () {
-      sinon.stub(connection, 'execute').resolves(expectedUpdate);
+  it('Atualizando um produto no DB', async function () {
+    sinon.stub(connection, 'execute').resolves(expectedUpdate);
 
-      const result = await productsModel.updateById(nameUpdate, payload);
+    const result = await productsModel.updateById(nameUpdate, payload);
 
-      expect(result).to.deep.equal(expectedUpdate);
-    });
+    expect(result).to.deep.equal(expectedUpdate);
+  });
+
+  it('Deletando um produto no DB', async function () {
+    sinon.stub(connection, 'execute').resolves();
+
+    const result = await productsModel.deleteById(payload);
+
+    expect(result).to.deep.equal();
+  })
 
 });

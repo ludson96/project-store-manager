@@ -63,4 +63,26 @@ describe('Teste de unidade da camdada service Products', function () {
       expect(result.message).to.deep.equal('id not found');
     })
   });
+
+  describe('Deletando umproduto no DB', function () {
+    it('Com um id existente', async function () {
+      sinon.stub(productsModel, 'findById').resolves(allProducts[0]);
+      sinon.stub(productsModel, 'deleteById').resolves();
+      
+      const result = await productsService.deleteById(payload);
+
+      expect(result.type).to.deep.equal(null);
+      expect(result.message).to.deep.equal('Deletado com sucesso');
+    });
+
+    it('Com um id inexistente, retorna erro "id not found"', async function () {
+      sinon.stub(productsModel, 'findById').resolves();
+      sinon.stub(productsModel, 'deleteById').resolves();
+
+      const result = await productsService.deleteById();
+
+      expect(result.type).to.deep.equal('ID_NOT_FOUND');
+      expect(result.message).to.deep.equal('id not found');
+    });
+  });
 })

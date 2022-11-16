@@ -26,22 +26,18 @@ const insert = async (name) => {
   return camelize(insertId);
 };
 
-const updateById = async (name, id) => {
-  await connection.execute(
+const updateById = async (name, id) => connection.execute(
     `UPDATE StoreManager.products
     SET name = ?
     WHERE id = ?`,
     [name, id],
   );
-};
   
-const deleteById = async (id) => {
-  await connection.execute(
+const deleteById = async (id) => connection.execute(
     `DELETE FROM StoreManager.products
   WHERE id = ?`,
     [id],
   );
-};
 
 module.exports = {
   findAll,
