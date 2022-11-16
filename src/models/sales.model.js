@@ -40,7 +40,6 @@ const getByIdSales = async (id) => {
     ORDER BY sale_id, product_id;`,
     [id],
   );
-  console.log('Eu sou o result do mdoels: ', result);
   return camelize(result);
 };
 

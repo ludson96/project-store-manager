@@ -7,7 +7,6 @@ const getAllSales = async () => {
 
 const getByIdSales = async (id) => {
   const result = await salesModel.getByIdSales(id);
-  console.log('Eu sou o result de service: ', result);
   if (!result.length > 0) return { type: 'Mensagem Service erro' };
   return { type: null, message: result };
 };

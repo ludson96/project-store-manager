@@ -5,7 +5,7 @@ const { productsService } = require('../../../src/services');
 
 const { allProducts, expected, payload, correctId, nameProduct, expectedInsert, expectedUpdate, nameUpdate } = require('./mocks/products.service.mock');
 
-describe('Teste de unidade da camdada service Products', function () {
+describe('Teste de unidade da camada service Products', function () {
   afterEach(sinon.restore);
 
   it('Listando todos os produtos do DB', async function () {
