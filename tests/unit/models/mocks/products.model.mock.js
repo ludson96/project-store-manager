@@ -23,9 +23,20 @@ const nameProduct = {
   "name": "ProdutoX"
 }
 
+const nameUpdate = {
+  "name": "Martelo do Batman"
+}
+
+const expectedUpdate = {
+  "id": 1,
+  "name": "Martelo do Batman"
+}
+
 module.exports = {
   allProducts,
   payload,
   correctId,
   nameProduct,
+  expectedUpdate,
+  nameUpdate,
 }

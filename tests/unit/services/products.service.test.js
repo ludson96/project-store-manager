@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 const { productsService } = require('../../../src/services');
 
-const { allProducts, expected, payload, correctId, nameProduct, expectedInsert } = require('./mocks/products.service.mock');
+const { allProducts, expected, payload, correctId, nameProduct, expectedInsert, expectedUpdate, nameUpdate } = require('./mocks/products.service.mock');
 
 describe('Teste de unidade da camdada service Products', function () {
   afterEach(sinon.restore);
@@ -41,4 +41,26 @@ describe('Teste de unidade da camdada service Products', function () {
     expect(result.type).to.deep.equal(null);
     expect(result.message).to.deep.equal(expectedInsert);
   });
-});
+
+  describe('Atualizando um produto no DB', function () {
+    it('Com um id valido, retorna objeto com resultado', async function () {
+      sinon.stub(productsModel, 'updateById').resolves();
+      sinon.stub(productsModel, 'findById').resolves(expectedUpdate)
+      
+      const result = await productsService.updateById(nameUpdate, payload);
+      
+      expect(result.type).to.deep.equal(null);
+      expect(result.message).to.deep.equal(expectedUpdate)
+    });
+
+    it('com um id invalido, retorna erro "id not found"', async function () {
+      sinon.stub(productsModel, 'updateById').resolves();
+      sinon.stub(productsModel, 'findById').resolves(undefined)
+
+      const result = await productsService.updateById(nameUpdate);
+
+      expect(result.type).to.deep.equal('ID_NOT_FOUND');
+      expect(result.message).to.deep.equal('id not found');
+    })
+  });
+})

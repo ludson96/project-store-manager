@@ -39,10 +39,21 @@ const expectedInsert = {
 
 const payload = 1;
 
+const nameUpdate = {
+  "name": "Martelo do Batman"
+}
+
+const expectedUpdate = {
+  "id": 1,
+  "name": "Martelo do Batman"
+}
+
 module.exports = {
   allProducts,
   payload,
   expected,
   nameProduct,
   expectedInsert,
+  nameUpdate,
+  expectedUpdate,
 }
