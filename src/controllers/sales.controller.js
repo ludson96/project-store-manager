@@ -16,7 +16,7 @@ const deleteByIdSales = async (req, res) => {
   const { id } = req.params;
   const { type } = await salesService.deleteByIdSales(id);
   if (type) return res.status(404).json({ message: 'Sale not found' });
-  return res.status(204).json({ message: 'Produto deletado com sucesso' });
+  return res.status(204).json({ message: 'Sale deletado com sucesso' });
 };
 
 module.exports = {

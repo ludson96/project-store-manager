@@ -13,7 +13,6 @@ const getByIdSales = async (id) => {
 
 const deleteByIdSales = async (id) => {
   const result = await salesModel.getByIdSales(id);
-  console.log('Eu sou o result do service: ', result);
   if (!result.length > 0) return { type: 'ID_NOT_FOUND', message: 'id not found' };
   await salesModel.deleteByIdSales(id);
   return { type: null, message: 'Deletado com sucesso' };

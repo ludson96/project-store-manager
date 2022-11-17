@@ -40,20 +40,11 @@ describe('Teste de unidade da camada model sales', function () {
   //   expect(result).to.deep.equal(expectedUpdate);
   // });
 
-  // it('Deletando um produto no DB', async function () {
-  //   sinon.stub(connection, 'execute').resolves();
+  it('Deletando um produto no DB', async function () {
+    sinon.stub(connection, 'execute').resolves();
 
-  //   const result = await productsModel.deleteById(payload);
+    const result = await salesModel.deleteByIdSales(payload);
 
-  //   expect(result).to.deep.equal();
-  // })
-
-  // it('Pesquisando pelo nome do produto', async function () {
-  //   sinon.stub(connection, 'execute').resolves([allProducts[0]])
-
-  //   const result = await productsModel.search('Martelo');
-
-  //   expect(result).to.deep.equal(allProducts[0]);
-  // })
-
+    expect(result).to.deep.equal();
+  })
 });

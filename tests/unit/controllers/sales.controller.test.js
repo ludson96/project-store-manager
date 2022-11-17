@@ -111,53 +111,37 @@ describe('Teste de unidade da camada controller Products', function () {
   //   });
   // });
 
-  // describe('Deletando um produto no DB', function () {
-  //   it('Com um id existente', async function () {
-  //     const req = { params: payload };
-  //     const res = {};
+  describe('Deletando um produto no DB', function () {
+    it('Com um id existente', async function () {
+      const req = { params: payload };
+      const res = {};
 
-  //     res.status = sinon.stub().returns(res);
-  //     res.json = sinon.stub().returns();
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
-  //     sinon.stub(productsService, 'deleteById')
-  //       .resolves({ type: null, message: 'Deletado com sucesso' });
+      sinon.stub(salesService, 'deleteByIdSales')
+        .resolves({ type: null, message: 'Sale com sucesso' });
 
-  //     await productsController.deleteById(req, res);
+      await salesController.deleteByIdSales(req, res);
 
-  //     expect(res.status).to.have.been.calledWith(204);
-  //     expect(res.json).to.have.been.calledWith({ message: 'Produto deletado com sucesso' })
-  //   });
+      expect(res.status).to.have.been.calledWith(204);
+      expect(res.json).to.have.been.calledWith({ message: 'Sale deletado com sucesso' })
+    });
 
-  //   it('Com um id inexistente', async function () {
-  //     const req = { params: 99999 };
-  //     const res = {};
+    it('Com um id inexistente', async function () {
+      const req = { params: 99999 };
+      const res = {};
 
-  //     res.status = sinon.stub().returns(res);
-  //     res.json = sinon.stub().returns();
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
-  //     sinon.stub(productsService, 'deleteById')
-  //       .resolves({ type: 'ID_NOT_FOUND', message: 'id not found' });
+      sinon.stub(salesService, 'deleteByIdSales')
+        .resolves({ type: 'ID_NOT_FOUND', message: 'id not found' });
 
-  //     await productsController.deleteById(req, res);
+      await salesController.deleteByIdSales(req, res);
 
-  //     expect(res.status).to.have.been.calledWith(404);
-  //     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
-  //   });
-  // });
-
-  // it('Pesquisando pelo nome do produto', async function () {
-  //   const req = { query: 'Martelo' };
-  //   const res = {};
-
-  //   res.status = sinon.stub().returns(res);
-  //   res.json = sinon.stub().returns();
-
-  //   sinon.stub(productsService, 'search')
-  //     .resolves({ type: null, message: allProducts[0] });
-
-  //   await productsController.search(req, res);
-
-  //   expect(res.status).to.have.been.calledWith(200);
-  //   expect(res.json).to.have.been.calledWith(allProducts[0])
-  // });
+      expect(res.status).to.have.been.calledWith(404);
+      expect(res.json).to.have.been.calledWith({ message: 'Sale not found' });
+    });
+  });
 });

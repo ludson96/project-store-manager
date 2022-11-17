@@ -64,34 +64,25 @@ describe('Teste de unidade da camdada service Sales', function () {
   //   })
   // });
 
-  // describe('Deletando umproduto no DB', function () {
-  //   it('Com um id existente', async function () {
-  //     sinon.stub(productsModel, 'findById').resolves(allProducts[0]);
-  //     sinon.stub(productsModel, 'deleteById').resolves();
+  describe('Deletando umproduto no DB', function () {
+    it('Com um id existente', async function () {
+      sinon.stub(salesModel, 'getByIdSales').resolves([allSales[0]]);
+      sinon.stub(salesModel, 'deleteByIdSales').resolves();
 
-  //     const result = await productsService.deleteById(payload);
+      const result = await salesService.deleteByIdSales(1);
 
-  //     expect(result.type).to.deep.equal(null);
-  //     expect(result.message).to.deep.equal('Deletado com sucesso');
-  //   });
+      expect(result.type).to.deep.equal(null);
+      expect(result.message).to.deep.equal('Deletado com sucesso');
+    });
 
-  //   it('Com um id inexistente, retorna erro "id not found"', async function () {
-  //     sinon.stub(productsModel, 'findById').resolves();
-  //     sinon.stub(productsModel, 'deleteById').resolves();
+    it('Com um id inexistente, retorna erro "id not found"', async function () {
+      sinon.stub(salesModel, 'getByIdSales').resolves([]);
+      sinon.stub(salesModel, 'deleteByIdSales').resolves();
 
-  //     const result = await productsService.deleteById();
+      const result = await salesService.deleteByIdSales();
 
-  //     expect(result.type).to.deep.equal('ID_NOT_FOUND');
-  //     expect(result.message).to.deep.equal('id not found');
-  //   });
-  // });
-
-  // it('Pesquisando pelo nome do produto', async function () {
-  //   sinon.stub(productsModel, 'search').resolves(allProducts[0]);
-
-  //   const result = await productsService.search('Martelo');
-
-  //   expect(result.type).to.deep.equal(null);
-  //   expect(result.message).to.deep.equal(allProducts[0]);
-  // });
+      expect(result.type).to.deep.equal('ID_NOT_FOUND');
+      expect(result.message).to.deep.equal('id not found');
+    });
+  });
 })
