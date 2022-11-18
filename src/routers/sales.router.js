@@ -1,10 +1,10 @@
 const express = require('express');
 const { salesController } = require('../controllers');
-const validateInputSale = require('../middlewares/validateInputSales');
+const { validateQuantity, validateSales } = require('../middlewares/validateInputSales');
 
 const router = express.Router();
 
-router.post('/', validateInputSale, salesController.insert);
+router.post('/', validateQuantity, validateSales, salesController.insert);
 
 router.get('/', salesController.getAllSales);
 

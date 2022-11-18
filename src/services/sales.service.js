@@ -1,12 +1,19 @@
 const { salesModel } = require('../models');
+const { validateProductId } = require('./validations/sales.validation');
 
 const insert = async (body) => {
+  console.log('Eu sou o body do service: ', body);
+  const { type, message } = await validateProductId(body);
+  console.log('Eu sou o type do servide: ', type);
+  console.log('Eu sou o type do servide: ', message);
+  if (type !== undefined) return { type, message };
   const saleId = await salesModel.insert(body);
   const sale = await salesModel.getByIdPostSales(saleId);
   const registeredSale = {
     id: saleId,
     itemsSold: sale,
   };
+  console.log('Eu sou registeredSale do service: ', registeredSale);
   return { type: null, message: registeredSale };
 };
 

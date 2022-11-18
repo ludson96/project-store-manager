@@ -20,9 +20,12 @@ const deleteByIdSales = async (req, res) => {
 };
 
 const insert = async (req, res) => {
-  const { body } = req;
-  const { message } = await salesService.insert(body);
-  res.status(201).json(message);
+  const sale = req.body;
+  const error = await salesService.insert(sale);
+  console.log('Error do controller: ', error);
+  if (error.type !== null) { return res.status(404).json({ message: 'Product not found' }); }
+  console.log('Eu sou message do controller: ', error.message);
+  return res.status(201).json(error.message);
 };
 
 module.exports = {

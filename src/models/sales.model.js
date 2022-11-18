@@ -57,6 +57,7 @@ const getByIdPostSales = async (id) => {
     WHERE sale_id = ?`,
     [id],
   );
+  console.log('Eu sou o getId de models:', result);
   return camelize(result);
 };
 
