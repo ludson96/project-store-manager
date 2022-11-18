@@ -1,5 +1,15 @@
 const { salesModel } = require('../models');
 
+const insert = async (body) => {
+  const saleId = await salesModel.insert(body);
+  const sale = await salesModel.getByIdPostSales(saleId);
+  const registeredSale = {
+    id: saleId,
+    itemsSold: sale,
+  };
+  return { type: null, message: registeredSale };
+};
+
 const getAllSales = async () => {
   const result = await salesModel.getAllSales();
   return { type: null, message: result };
@@ -22,4 +32,5 @@ module.exports = {
   getAllSales,
   getByIdSales,
   deleteByIdSales,
+  insert,
 };

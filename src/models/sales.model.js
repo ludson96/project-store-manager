@@ -1,23 +1,30 @@
 const camelize = require('camelize');
-// const snakeize = require('snakeize');
+const snakeize = require('snakeize');
 const connection = require('./connection');
 
-// const insert = async (products) => {
-//   const [{ insertId }]= products.forEach((product) => {
-//   const columns = Object.keys(snakeize(product))
-//     .map((key) => `${key}`).join(', ');
-  
-//   const placeholders = Object.keys(product)
-//     .map((_key) => '?').join(', ');
-  
-//   const [{ insertId }] = await connection.execute(
-//     `INSERT INTO StoreManager.products (${columns}) VALUE (${placeholders})`,
-//     [...Object.values(product)],
-//   );
-//   });
+const insert = async (products) => {
+  const [{ insertId }] = await connection.execute(
+    `INSERT INTO StoreManager.sales (date)
+    VALUES (NOW())`,
+  );
+  console.log('Eu sou o products do model: ', products);
 
-//   return insertId;
-// };
+ const promises = products.map(async (product) => {
+    const columns = Object.keys(snakeize(product))
+    .map((key) => `${key}`).join(', ');
+    
+    const placeholders = Object.keys(product)
+    .map((_key) => '?').join(', ');
+    
+    await connection.execute(
+      `INSERT INTO StoreManager.sales_products (sale_id, ${columns}) 
+      VALUE (${insertId}, ${placeholders})`,
+      [...Object.values(product)],
+      );
+ });
+  await Promise.all(promises);
+  return camelize(insertId);
+};
 
 const getAllSales = async () => {
     const [result] = await connection.execute(
@@ -43,15 +50,34 @@ const getByIdSales = async (id) => {
   return camelize(result);
 };
 
+const getByIdPostSales = async (id) => {
+  const [result] = await connection.execute(
+    `SELECT product_id, quantity 
+    FROM StoreManager.sales_products 
+    WHERE sale_id = ?`,
+    [id],
+  );
+  return camelize(result);
+};
+
 const deleteByIdSales = async (id) => connection.execute(
   `DELETE FROM StoreManager.sales
   WHERE id = ?`,
   [id],
 );
 
+const updateByIdSales = async (name, id) => connection.execute(
+  `UPDATE StoreManager.sales_products
+    SET name = ?
+    WHERE sale_id = ?`,
+  [name, id],
+);
+
 module.exports = {
-  // insert,
+  insert,
   getAllSales,
   getByIdSales,
   deleteByIdSales,
+  updateByIdSales,
+  getByIdPostSales,
 };

@@ -19,8 +19,15 @@ const deleteByIdSales = async (req, res) => {
   return res.status(204).json({ message: 'Sale deletado com sucesso' });
 };
 
+const insert = async (req, res) => {
+  const { body } = req;
+  const { message } = await salesService.insert(body);
+  res.status(201).json(message);
+};
+
 module.exports = {
   getAllSales,
   getByIdSales,
   deleteByIdSales,
+  insert,
 };
