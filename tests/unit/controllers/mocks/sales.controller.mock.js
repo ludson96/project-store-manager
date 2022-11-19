@@ -48,5 +48,4 @@ module.exports = {
   payload,
   expectedUpdate,
   update,
-  retorno,
 }

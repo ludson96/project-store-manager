@@ -36,7 +36,7 @@ const updateByIdSales = async (sales, id) => {
   if (type !== undefined) return { type, message };
   const idVerified = await salesModel.getByIdPostSales(sales, id);
   if (!idVerified.length > 0) return { type: 'ID_NOT_FOUND', message: 'Sale not found' };
-  // await salesModel.updateByIdSales(sales, id);
+  await salesModel.updateByIdSales(sales, id);
   const saleUpdated = await salesModel.getByIdPostSales(id);
   const result = {
     saleId: Number(id),

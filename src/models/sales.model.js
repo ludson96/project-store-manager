@@ -61,14 +61,13 @@ const updateByIdSales = async (sales, id) => {
   await Promise.all(promises);
 };
 
-const getByIdPostSales = async (sales, id) => {
+const getByIdPostSales = async (id) => {
   const [result] = await connection.execute(
     `SELECT product_id, quantity 
     FROM StoreManager.sales_products 
     WHERE sale_id = ?`,
     [id],
   );
-  await updateByIdSales(sales, id);
   return camelize(result);
 };
 
