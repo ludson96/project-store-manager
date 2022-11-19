@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const { salesModel } = require('../../../src/models');
 const { salesService } = require('../../../src/services');
 
-const { allSales, payload } = require('./mocks/sales.service.mock');
+const { allSales, payload, expectedUpdate, update, retorno } = require('./mocks/sales.service.mock');
 
 describe('Teste de unidade da camdada service Sales', function () {
   afterEach(sinon.restore);
@@ -42,27 +42,29 @@ describe('Teste de unidade da camdada service Sales', function () {
   //   expect(result.message).to.deep.equal(expectedInsert);
   // });
 
-  // describe('Atualizando um produto no DB', function () {
-  //   it('Com um id valido, retorna objeto com resultado', async function () {
-  //     sinon.stub(productsModel, 'updateById').resolves();
-  //     sinon.stub(productsModel, 'findById').resolves(expectedUpdate)
+  describe('Atualizando um produto no DB', function () {
+    it('Com um id valido, retorna objeto com resultado', async function () {
+      sinon.stub(salesModel, 'getByIdPostSales')
+        .onFirstCall()
+        .resolves([allSales[0]])
+        .onSecondCall()
+        .resolves(expectedUpdate);
 
-  //     const result = await productsService.updateById(nameUpdate, payload);
+      const result = await salesService.updateByIdSales(update, payload);
 
-  //     expect(result.type).to.deep.equal(null);
-  //     expect(result.message).to.deep.equal(expectedUpdate)
-  //   });
+      expect(result.type).to.deep.equal(null);
+      expect(result.message).to.deep.equal(retorno)
+    });
 
-  //   it('com um id invalido, retorna erro "id not found"', async function () {
-  //     sinon.stub(productsModel, 'updateById').resolves();
-  //     sinon.stub(productsModel, 'findById').resolves(undefined)
+    it('com um id invalido, retorna erro "Sale not found"', async function () {
+      sinon.stub(salesModel, 'getByIdPostSales').resolves([])
 
-  //     const result = await productsService.updateById(nameUpdate);
+      const result = await salesService.updateByIdSales(update, payload);
 
-  //     expect(result.type).to.deep.equal('ID_NOT_FOUND');
-  //     expect(result.message).to.deep.equal('id not found');
-  //   })
-  // });
+      expect(result.type).to.deep.equal('ID_NOT_FOUND');
+      expect(result.message).to.deep.equal('Sale not found');
+    })
+  });
 
   describe('Deletando umproduto no DB', function () {
     it('Com um id existente', async function () {

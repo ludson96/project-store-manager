@@ -21,7 +21,32 @@ const allSales = [
 
 const payload = 1;
 
+const update = [
+  {
+    "productId": 1,
+    "quantity": 10
+  },
+  {
+    "productId": 2,
+    "quantity": 50
+  }
+]
+
+const expectedUpdate = [
+  {
+    "productId": 1,
+    "quantity": 10
+  },
+  {
+    "productId": 2,
+    "quantity": 50
+  }
+]
+
 module.exports = {
   allSales,
   payload,
+  expectedUpdate,
+  update,
+  retorno,
 }

@@ -49,22 +49,6 @@ const getByIdSales = async (id) => {
   return camelize(result);
 };
 
-const getByIdPostSales = async (id) => {
-  const [result] = await connection.execute(
-    `SELECT product_id, quantity 
-    FROM StoreManager.sales_products 
-    WHERE sale_id = ?`,
-    [id],
-  );
-  return camelize(result);
-};
-
-const deleteByIdSales = async (id) => connection.execute(
-  `DELETE FROM StoreManager.sales
-  WHERE id = ?`,
-  [id],
-);
-
 const updateByIdSales = async (sales, id) => {
   const promises = sales.map(async ({ productId, quantity }) => {
     await connection.execute(
@@ -76,6 +60,23 @@ const updateByIdSales = async (sales, id) => {
   });
   await Promise.all(promises);
 };
+
+const getByIdPostSales = async (sales, id) => {
+  const [result] = await connection.execute(
+    `SELECT product_id, quantity 
+    FROM StoreManager.sales_products 
+    WHERE sale_id = ?`,
+    [id],
+  );
+  await updateByIdSales(sales, id);
+  return camelize(result);
+};
+
+const deleteByIdSales = async (id) => connection.execute(
+  `DELETE FROM StoreManager.sales
+  WHERE id = ?`,
+  [id],
+);
 
 module.exports = {
   insert,

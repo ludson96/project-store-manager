@@ -7,7 +7,7 @@ chai.use(sinonChai);
 
 const { salesService } = require('../../../src/services');
 const { salesController } = require('../../../src/controllers');
-const { allSales, payload } = require('./mocks/sales.controller.mock');
+const { allSales, payload, expectedUpdate, update } = require('./mocks/sales.controller.mock');
 
 describe('Teste de unidade da camada controller Products', function () {
   afterEach(sinon.restore);
@@ -77,39 +77,39 @@ describe('Teste de unidade da camada controller Products', function () {
   //   expect(res.status).to.have.been.calledWith(201);
   //   expect(res.json).to.have.been.calledWith(expectedInsert);
   // });
-  // describe('Atualizando um produto no banco de dados', function () {
-  //   it('retorna status 200 e objeto com resultado', async function () {
-  //     const req = { params: payload, body: nameUpdate };
-  //     const res = {};
+  describe('Atualizando um produto no banco de dados', function () {
+    it('retorna status 200 e objeto com resultado', async function () {
+      const req = { params: payload, body: update };
+      const res = {};
 
-  //     res.status = sinon.stub().returns(res);
-  //     res.json = sinon.stub().returns();
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
 
-  //     sinon.stub(productsService, 'updateById')
-  //       .resolves({ type: null, message: expectedUpdate });
+      sinon.stub(salesService, 'updateByIdSales')
+        .resolves({ type: null, message: expectedUpdate });
 
-  //     await productsController.updateById(req, res);
+      await salesController.updateByIdSales(req, res);
 
-  //     expect(res.status).to.have.been.calledWith(200);
-  //     expect(res.json).to.have.been.calledWith(expectedUpdate)
-  //   });
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(expectedUpdate)
+    });
 
-  //   it('retorna status 404 e mensagem "Product not found"', async function () {
-  //     const req = { params: 9999, body: nameUpdate };
-  //     const res = {};
+    // it('retorna status 404 e mensagem "Product not found"', async function () {
+    //   const req = { params: 9999, body: nameUpdate };
+    //   const res = {};
 
-  //     res.status = sinon.stub().returns(res);
-  //     res.json = sinon.stub().returns();
+    //   res.status = sinon.stub().returns(res);
+    //   res.json = sinon.stub().returns();
 
-  //     sinon.stub(productsService, 'updateById')
-  //       .resolves({ type: 'ID_NOT_FOUND', message: 'Product not found' });
+    //   sinon.stub(productsService, 'updateById')
+    //     .resolves({ type: 'ID_NOT_FOUND', message: 'Product not found' });
 
-  //     await productsController.updateById(req, res);
+    //   await productsController.updateById(req, res);
 
-  //     expect(res.status).to.have.been.calledWith(404);
-  //     expect(res.json).to.have.been.calledWith({ message: 'Product not found' })
-  //   });
-  // });
+    //   expect(res.status).to.have.been.calledWith(404);
+    //   expect(res.json).to.have.been.calledWith({ message: 'Product not found' })
+    // });
+  });
 
   describe('Deletando um produto no DB', function () {
     it('Com um id existente', async function () {
