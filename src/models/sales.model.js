@@ -7,7 +7,6 @@ const insert = async (products) => {
     `INSERT INTO StoreManager.sales (date)
     VALUES (NOW())`,
   );
-  console.log('Eu sou o products do model: ', products);
 
  const promises = products.map(async (product) => {
     const columns = Object.keys(snakeize(product))
@@ -57,7 +56,6 @@ const getByIdPostSales = async (id) => {
     WHERE sale_id = ?`,
     [id],
   );
-  console.log('Eu sou o getId de models:', result);
   return camelize(result);
 };
 
@@ -67,12 +65,17 @@ const deleteByIdSales = async (id) => connection.execute(
   [id],
 );
 
-const updateByIdSales = async (name, id) => connection.execute(
-  `UPDATE StoreManager.sales_products
-    SET name = ?
-    WHERE sale_id = ?`,
-  [name, id],
-);
+const updateByIdSales = async (sales, id) => {
+  const promises = sales.map(async ({ productId, quantity }) => {
+    await connection.execute(
+      `UPDATE StoreManager.sales_products 
+      SET quantity = ?
+      WHERE sale_id = ? and product_id = ?;`,
+      [quantity, id, productId],
+    );
+  });
+  await Promise.all(promises);
+};
 
 module.exports = {
   insert,

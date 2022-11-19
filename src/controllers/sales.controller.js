@@ -22,10 +22,16 @@ const deleteByIdSales = async (req, res) => {
 const insert = async (req, res) => {
   const sale = req.body;
   const error = await salesService.insert(sale);
-  console.log('Error do controller: ', error);
   if (error.type !== null) { return res.status(404).json({ message: 'Product not found' }); }
-  console.log('Eu sou message do controller: ', error.message);
   return res.status(201).json(error.message);
+};
+
+const updateByIdSales = async (req, res) => {
+  const { id } = req.params;
+  const sales = req.body;
+  const { type, message } = await salesService.updateByIdSales(sales, id);
+  if (type) return res.status(404).json({ message });
+  return res.status(200).json(message);
 };
 
 module.exports = {
@@ -33,4 +39,5 @@ module.exports = {
   getByIdSales,
   deleteByIdSales,
   insert,
+  updateByIdSales,
 };

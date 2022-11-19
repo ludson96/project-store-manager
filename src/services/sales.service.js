@@ -2,10 +2,7 @@ const { salesModel } = require('../models');
 const { validateProductId } = require('./validations/sales.validation');
 
 const insert = async (body) => {
-  console.log('Eu sou o body do service: ', body);
   const { type, message } = await validateProductId(body);
-  console.log('Eu sou o type do servide: ', type);
-  console.log('Eu sou o type do servide: ', message);
   if (type !== undefined) return { type, message };
   const saleId = await salesModel.insert(body);
   const sale = await salesModel.getByIdPostSales(saleId);
@@ -13,7 +10,6 @@ const insert = async (body) => {
     id: saleId,
     itemsSold: sale,
   };
-  console.log('Eu sou registeredSale do service: ', registeredSale);
   return { type: null, message: registeredSale };
 };
 
@@ -35,9 +31,24 @@ const deleteByIdSales = async (id) => {
   return { type: null, message: 'Deletado com sucesso' };
 };
 
+const updateByIdSales = async (sales, id) => {
+  const { type, message } = await validateProductId(sales);
+  if (type !== undefined) return { type, message };
+  const idVerified = await salesModel.getByIdPostSales(id);
+  if (!idVerified.length > 0) return { type: 'ID_NOT_FOUND', message: 'Sale not found' };
+  await salesModel.updateByIdSales(sales, id);
+  const saleUpdated = await salesModel.getByIdPostSales(id);
+  const result = {
+    saleId: Number(id),
+    itemsUpdated: saleUpdated,
+  };
+  return { type: null, message: result };
+};
+
 module.exports = {
   getAllSales,
   getByIdSales,
   deleteByIdSales,
   insert,
+  updateByIdSales,
 };
