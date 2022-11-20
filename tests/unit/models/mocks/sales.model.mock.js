@@ -46,9 +46,24 @@ const expectedUpdate = {
 
 const payload = 1;
 
+const insertNewSale = [
+  {
+    "productId": 1,
+    "quantity": 1
+  },
+  {
+    "productId": 2,
+    "quantity": 5
+  }
+]
+
+const newIdSale = 4;
+
 module.exports = {
   allSales,
   payload,
   update,
   expectedUpdate,
+  insertNewSale,
+  newIdSale,
 }

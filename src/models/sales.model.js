@@ -7,8 +7,9 @@ const insert = async (products) => {
     `INSERT INTO StoreManager.sales (date)
     VALUES (NOW())`,
   );
-
- const promises = products.map(async (product) => {
+  console.log('Eu sou o insertId do models: ', insertId);
+  
+  const promises = products.map(async (product) => {
     const columns = Object.keys(snakeize(product))
     .map((key) => `${key}`).join(', ');
     
@@ -68,7 +69,6 @@ const getByIdPostSales = async (id) => {
     WHERE sale_id = ?`,
     [id],
   );
-  console.log('Eu sou o result do model: ', result);
   return camelize(result);
 };
 

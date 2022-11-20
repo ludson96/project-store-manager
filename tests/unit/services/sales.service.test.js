@@ -42,7 +42,7 @@ describe('Teste de unidade da camdada service Sales', function () {
   //   expect(result.message).to.deep.equal(expectedInsert);
   // });
 
-  describe('Atualizando um produto no DB', function () {
+  describe('Atualizando uma venda no DB', function () {
     it('Com um id valido, retorna objeto com resultado', async function () {
       sinon.stub(salesModel, 'getByIdPostSales')
         .onFirstCall()
