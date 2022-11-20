@@ -57,10 +57,64 @@ const retorno = {
   ]
 }
 
+const correctId = 3;
+
+const newSale = [
+  {
+    "productId": 1,
+    "quantity": 1
+  },
+  {
+    "productId": 2,
+    "quantity": 5
+  }
+];
+
+const expectById = [
+  {
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "productId": 2,
+      "quantity": 5
+    }
+  ]
+
+const retornoNewSale = {
+  "id": 3,
+  "itemsSold": [
+    {
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "productId": 2,
+      "quantity": 5
+    }
+  ]
+};
+
+const productIdSaleWrong = [
+  {
+    "productId": 1,
+    "quantity": 1
+  },
+  {
+    "productId": 999,
+    "quantity": 5
+  }
+];
+
 module.exports = {
   allSales,
   payload,
   expectedUpdate,
   update,
   retorno,
+  correctId,
+  newSale,
+  retornoNewSale,
+  expectById,
+  productIdSaleWrong,
 }

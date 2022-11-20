@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const { salesModel } = require('../../../src/models');
 const { salesService } = require('../../../src/services');
 
-const { allSales, payload, expectedUpdate, update, retorno } = require('./mocks/sales.service.mock');
+const { allSales, payload, expectedUpdate, update, retorno, correctId, newSale, retornoNewSale, expectById, productIdSaleWrong } = require('./mocks/sales.service.mock');
 
 describe('Teste de unidade da camdada service Sales', function () {
   afterEach(sinon.restore);
@@ -32,15 +32,6 @@ describe('Teste de unidade da camdada service Sales', function () {
     expect(result.type).to.equal('Mensagem Service erro');
   });
 
-  // it('Adicionando um novo produto ao Database', async function () {
-  //   sinon.stub(productsModel, 'insert').resolves(correctId);
-  //   sinon.stub(productsModel, 'findById').resolves(expectedInsert);
-
-  //   const result = await productsService.insert(nameProduct);
-
-  //   expect(result.type).to.deep.equal(null);
-  //   expect(result.message).to.deep.equal(expectedInsert);
-  // });
 
   describe('Atualizando uma venda no DB', function () {
     it('Com um id valido, retorna objeto com resultado', async function () {
@@ -64,9 +55,17 @@ describe('Teste de unidade da camdada service Sales', function () {
       expect(result.type).to.deep.equal('ID_NOT_FOUND');
       expect(result.message).to.deep.equal('Sale not found');
     })
+
+    it('com um productId inexistente, retorna erro "Product not found"', async function () {
+
+      const result = await salesService.updateByIdSales(productIdSaleWrong);
+
+      expect(result.type).to.deep.equal('DRIVER_NOT_FOUND');
+      expect(result.message).to.deep.equal('Product not found');
+    })
   });
 
-  describe('Deletando umproduto no DB', function () {
+  describe('Deletando um sale no DB', function () {
     it('Com um id existente', async function () {
       sinon.stub(salesModel, 'getByIdSales').resolves([allSales[0]]);
       sinon.stub(salesModel, 'deleteByIdSales').resolves();
@@ -86,5 +85,25 @@ describe('Teste de unidade da camdada service Sales', function () {
       expect(result.type).to.deep.equal('ID_NOT_FOUND');
       expect(result.message).to.deep.equal('id not found');
     });
+  });
+
+  describe('Adicionando um sale no DB', function () {
+    it('com um id existente, retorna o objeto desejado', async function () {
+      sinon.stub(salesModel, 'insert').resolves(correctId);
+      sinon.stub(salesModel, 'getByIdPostSales').resolves(expectById);
+
+      const result = await salesService.insert(newSale);
+
+      expect(result.type).to.deep.equal(null);
+      expect(result.message).to.deep.equal(retornoNewSale);
+    });
+
+    it('com um productId inexistente, retorna erro "Product not found"', async function () {
+
+      const result = await salesService.insert(productIdSaleWrong);
+
+      expect(result.type).to.deep.equal('DRIVER_NOT_FOUND');
+      expect(result.message).to.deep.equal('Product not found');
+    })
   });
 })

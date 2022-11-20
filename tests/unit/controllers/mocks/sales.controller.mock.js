@@ -43,9 +43,48 @@ const expectedUpdate = [
   }
 ]
 
+const bodySale = [
+  {
+    "productId": 1,
+    "quantity": 1
+  },
+  {
+    "productId": 2,
+    "quantity": 5
+  }
+];
+
+const expectNewSale = {
+  "id": 3,
+  "itemsSold": [
+    {
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "productId": 2,
+      "quantity": 5
+    }
+  ]
+};
+
+const productIdSaleWrong = [
+  {
+    "productId": 1,
+    "quantity": 1
+  },
+  {
+    "productId": 999,
+    "quantity": 5
+  }
+];
+
 module.exports = {
   allSales,
   payload,
   expectedUpdate,
   update,
+  bodySale,
+  expectNewSale,
+  productIdSaleWrong,
 }

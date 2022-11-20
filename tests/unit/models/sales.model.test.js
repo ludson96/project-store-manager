@@ -24,15 +24,6 @@ describe('Teste de unidade da camada model sales', function () {
     expect(result).to.deep.equal(allSales[0]);
   });
 
-  it('Adicionando novo produto no DB', async function () {
-    sinon.stub(connection, 'execute').resolves([newIdSale])
-  
-
-    const result = await salesModel.insert(insertNewSale);
-    console.log('Eu sou o result do teste: ', result );
-
-    expect(result).to.deep.equal(newIdSale);
-  });
 
   it('Atualizando um produto no DB', async function () {
     sinon.stub(connection, 'execute').resolves([expectedUpdate]);
@@ -50,4 +41,23 @@ describe('Teste de unidade da camada model sales', function () {
 
     expect(result).to.deep.equal();
   })
+
+  it('Pegando id para alterar o sale no DB', async function () {
+    sinon.stub(connection, 'execute').resolves([allSales[0]])
+  
+
+    const result = await salesModel.getByIdPostSales(payload);
+
+    expect(result).to.deep.equal(allSales[0]);
+  });
+
+  it('Adicionando novo produto no DB', async function () {
+    sinon.stub(connection, 'execute').resolves([{ insertId: 4 }])
+  
+
+    const result = await salesModel.insert(insertNewSale);
+
+    expect(result).to.deep.equal(newIdSale);
+  });
+
 });
