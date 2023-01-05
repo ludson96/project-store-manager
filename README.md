@@ -1,26 +1,26 @@
 # Repositório do projeto Store Manager
-
  ## Módulo: BACK-END
  
   Repositório possui projeto desenvolvido no período que estive na <b>Trybe</b>, abordando os conceitos de <b>RESTFul API</b> com CRUD completo utilizando arquitetura Model-Service-Controller (MSC)
   
 ---
+## Informações de aprendizados
 
-### Linguagem usadas
+- Este é um projeto desenvolvido para me ajudar a aprender os principais conceitos de `arquitetura MSC` e testes com `mocha`, `chai` e `sinon`;
+- Meu primeiro projeto arquitetura MSC` e testes com `mocha`, `chai` e `sinon`;
+- Utilizei o Cliente Rest `Thunder Client`, como extensão, para visualizar o retorno do meu acesso.
+---
+## Linguagens usadas
 
-![JavaScript][JavaScript.io]
-
-[![NodeJS][NodeJS.io]][NodeJS-url]
-
-[![Express][Express.io]][Express-url]
-
-[![MySQL][MySQL.io]][MySQL-url]
-
-[![Mocha][Mocha.io]][Mocha-url]
-
-[![Chai][Chai.io]][Chai-url]
-
-[![Docker][Docker.io]][Docker-url]
+[![JavaScript][JavaScript-logo]][JavaScript-url]
+[![NodeJS][NodeJS-logo]][NodeJS-url]
+[![Express][Express-logo]][Express-url]
+[![MySQL][MySQL-logo]][MySQL-url]
+[![Mocha][Mocha-logo]][Mocha-url]
+[![Chai][Chai-logo]][Chai-url]
+[![Docker][Docker-logo]][Docker-url]
+[![Nodemon][Nodemon-logo]][Nodemon-url]
+[![ESLint][ESLint-logo]][ESLint-url]
 
 ---
 
@@ -36,26 +36,23 @@
 - Escrever assinaturas para APIs intuitivas e facilmente entendíveis.
 
 ---
-
 ## O que foi desenvolvido
 
 Uma API Rest trata-se de um sistema de gerenciamento de vendas, onde será possível criar, visualizar, deletar e atualizar produtos e vendas.
-
+> Arquivos `migration.sql`, `seed.sql` e `docker-compose.yml` fornecidos pela Trybe.
 ---
-
 ## Variáveis de Ambiente
 
-Para rodar esse projeto, atente-se as variáveis de ambiente no seu .env
+Para rodar esse projeto, atente-se as variáveis de ambiente no seu .env. Existe um arquivo `.env.example` com as instruções de configurações.
 
 ---
-
-### Instruções para instalar e rodar
+## Instruções para instalar e rodar
 
 1. Clone o repo:
 ```
   git clone git@github.com:Ludson96/project-store-manager.git
 ```
-2. Já existe um arquivo docker-compose.yml (Disponibilizado pela Trybe). Bastando usar o comando docker-compose up para rodar o MySQL e o Node pelo docker. Execute os services do docker: `node` e `db` 
+2. Já existe um arquivo docker-compose.yml. Bastando usar o comando docker-compose up para rodar o MySQL e o Node pelo docker. Execute os services do docker: `node` e `db` 
 ```
   docker-compose up -d
 ```
@@ -63,7 +60,7 @@ Para rodar esse projeto, atente-se as variáveis de ambiente no seu .env
 ```
   docker exec -it store_manager bash
 ```
-4. Instale as suas dependencias:
+4. Instale as suas dependências:
 ```
   npm install
 ```
@@ -84,10 +81,9 @@ Outra forma de executar é utilizando o `nodemom` (permite fazer alteração em 
 
 ![Diagrama de relacionamentos das tabelas](diagrama.png)
 
-<i> Imagem disponibilizada pela Trybe </i>
+> _Imagem disponibilizada pela Trybe_
 
 ---
-
 ## Usage
 
 Since this is a simple back-end project, there's no front-end.
@@ -296,19 +292,21 @@ Using `StoreManager` DB (`migration.sql` and `seed.sql`).
 - Will return a HTTP `204` status if the sale is successfully deleted.
  </details>
 
-
-> Primeiro projeto usando a `arquitetura MSC` e testes com `mocha`, `chai` e `sinon`
-
-[JavaScript.io]: https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black
-[Express.io]: https://img.shields.io/badge/express-000000?style=flat-square&logo=express&logoColor=white
-[Express-url]: https://expressjs.com
-[Mocha.io]: https://img.shields.io/badge/mocha-8D6748?style=flat-square&logo=mocha&logoColor=white
-[Mocha-url]: https://mochajs.org
-[Chai.io]: https://img.shields.io/badge/chai-A30701?style=flat-square&logo=chai&logoColor=white
-[Chai-url]: https://www.chaijs.com
-[NodeJS.io]: https://img.shields.io/badge/node.js-339933?style=flat-square&logo=node.js&logoColor=white
+[JavaScript-logo]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
+[JavaScript-url]: https://www.javascript.com/
+[NodeJS-logo]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
 [NodeJS-url]: https://nodejs.org/en/
-[MySQL.io]: https://img.shields.io/badge/mysql-4479A1?style=flat-square&logo=mysql&logoColor=white
-[MySQL-url]: https://www.mysql.com
-[Docker.io]: https://img.shields.io/badge/docker-2496ED?style=flat-square&logo=docker&logoColor=white
+[Docker-logo]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
 [Docker-url]: https://www.docker.com
+[MySQL-logo]: https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white
+[MySQL-url]: https://www.mysql.com
+[Express-logo]: https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB
+[Express-url]: https://expressjs.com
+[Mocha-logo]: https://img.shields.io/badge/-mocha-%238D6748?style=for-the-badge&logo=mocha&logoColor=white
+[Mocha-url]: https://mochajs.org
+[Nodemon-logo]: https://img.shields.io/badge/Nodemon-76D04B?logo=nodemon&logoColor=fff&style=for-the-badge
+[Nodemon-url]: https://www.npmjs.com/package/nodemon
+[ESLint-logo]: https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white
+[ESLint-url]: https://eslint.org/
+[Chai-logo]: https://img.shields.io/badge/Chai-A30701?logo=chai&logoColor=fff&style=for-the-badge
+[Chai-url]: https://www.chaijs.com
