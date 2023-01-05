@@ -2,14 +2,11 @@
  ## Módulo: BACK-END
  
   Repositório possui projeto desenvolvido no período que estive na <b>Trybe</b>, abordando os conceitos de <b>RESTFul API</b> com CRUD completo utilizando arquitetura Model-Service-Controller (MSC)
-  
----
 ## Informações de aprendizados
 
 - Este é um projeto desenvolvido para me ajudar a aprender os principais conceitos de `arquitetura MSC` e testes com `mocha`, `chai` e `sinon`;
 - Meu primeiro projeto arquitetura MSC` e testes com `mocha`, `chai` e `sinon`;
 - Utilizei o Cliente Rest `Thunder Client`, como extensão, para visualizar o retorno do meu acesso.
----
 ## Linguagens usadas
 
 [![JavaScript][JavaScript-logo]][JavaScript-url]
@@ -21,9 +18,6 @@
 [![Docker][Docker-logo]][Docker-url]
 [![Nodemon][Nodemon-logo]][Nodemon-url]
 [![ESLint][ESLint-logo]][ESLint-url]
-
----
-
 ## Habilidades
 
 - Entender o funcionamento da camada de Model;
@@ -35,17 +29,14 @@
 - Entender e aplicar os padrões REST;
 - Escrever assinaturas para APIs intuitivas e facilmente entendíveis.
 
----
 ## O que foi desenvolvido
 
 Uma API Rest trata-se de um sistema de gerenciamento de vendas, onde será possível criar, visualizar, deletar e atualizar produtos e vendas.
 > Arquivos `migration.sql`, `seed.sql` e `docker-compose.yml` fornecidos pela Trybe.
----
 ## Variáveis de Ambiente
 
 Para rodar esse projeto, atente-se as variáveis de ambiente no seu .env. Existe um arquivo `.env.example` com as instruções de configurações.
 
----
 ## Instruções para instalar e rodar
 
 1. Clone o repo:
@@ -75,7 +66,6 @@ Outra forma de executar é utilizando o `nodemom` (permite fazer alteração em 
 ```
 6. Utilizar alguma Plataforma de API para acessar os endpoints e fazer seus devidos experimentos. Exemplos: Postman e Insomnia.
 
----
 
 ## Diagrama
 
@@ -83,7 +73,6 @@ Outra forma de executar é utilizando o `nodemom` (permite fazer alteração em 
 
 > _Imagem disponibilizada pela Trybe_
 
----
 ## Usage
 
 Since this is a simple back-end project, there's no front-end.
