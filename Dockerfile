@@ -38,8 +38,8 @@ RUN npm install --omit=dev --legacy-peer-deps
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=builder /app/dist ./dist
+# Copia toda a pasta prisma (que já contém prisma/store.db e os schemas)
 COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/store.db ./prisma/store.db
 
 EXPOSE 10000
 
