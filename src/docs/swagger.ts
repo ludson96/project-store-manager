@@ -12,12 +12,8 @@ export const swaggerSpec = {
   },
   servers: [
     {
-      url: 'http://localhost:3001',
-      description: 'Local Development Server',
-    },
-    {
-      url: 'https://project-store-manager.onrender.com',
-      description: 'Render Cloud Production Server',
+      url: '/',
+      description: 'Current Server (Dynamic / Automatic Host)',
     },
   ],
   tags: [
