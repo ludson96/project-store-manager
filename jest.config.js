@@ -1,8 +1,13 @@
 module.exports = {
-  "globalSetup": "<rootDir>/__tests__/_globalSetup.js",
-  "testSequencer": "<rootDir>/__tests__/_testSequencer.js",
-  "testMatch": [
-    "**/__tests__/*.test.js"
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  testMatch: ['**/tests/**/*.test.ts'],
+  clearMocks: true,
+  coverageDirectory: 'coverage',
+  collectCoverageFrom: [
+    'src/services/**/*.ts',
+    'src/controllers/**/*.ts',
+    'src/middlewares/**/*.ts',
   ],
-  "testTimeout": 15000
-}
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
+};

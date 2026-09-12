@@ -1,301 +1,166 @@
-# Repositório do projeto Store Manager 🛍️
- ## Módulo: BACK-END
- 
-  Repositório possui projeto desenvolvido no período que estive na <b>Trybe</b>, abordando os conceitos de <b>RESTFul API</b> com CRUD completo utilizando arquitetura Model-Service-Controller (MSC)
-## Informações de aprendizados
+# 🛍️ Store Manager API
 
-- Este é um projeto desenvolvido para me ajudar a aprender os principais conceitos de `arquitetura MSC` e testes com `mocha`, `chai` e `sinon`;
-- Meu primeiro projeto arquitetura MSC` e testes com `mocha`, `chai` e `sinon`;
-- Utilizei o Cliente Rest `Thunder Client`, como extensão, para visualizar o retorno do meu acesso.
-## Linguagens usadas
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Express](https://img.shields.io/badge/Express-4.21-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-5.22-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![Swagger](https://img.shields.io/badge/Swagger-OpenAPI%203.0-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](https://swagger.io/)
+[![Jest](https://img.shields.io/badge/Jest-Tested-C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
+[![CI Pipeline](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
-[![JavaScript][JavaScript-logo]][JavaScript-url]
-[![NodeJS][NodeJS-logo]][NodeJS-url]
-[![Express][Express-logo]][Express-url]
-[![MySQL][MySQL-logo]][MySQL-url]
-[![Mocha][Mocha-logo]][Mocha-url]
-[![Chai][Chai-logo]][Chai-url]
-[![Docker][Docker-logo]][Docker-url]
-[![Nodemon][Nodemon-logo]][Nodemon-url]
-[![ESLint][ESLint-logo]][ESLint-url]
-## Habilidades
+API RESTful para gerenciamento de estoque e vendas desenvolvida com **Node.js**, **Express**, **TypeScript** e **Prisma ORM**. O projeto implementa arquitetura em camadas (**MSC - Model, Service, Controller**), garantia de **transações atômicas (ACID)** para operações compostas de venda, documentação interativa com **Swagger/OpenAPI** e testes automatizados de ponta a ponta.
 
-- Entender o funcionamento da camada de Model;
-- Delegar responsabilidades específicas para essa camada;
-- Conectar sua aplicação com diferentes bancos de dados;
-- Estruturar uma aplicação em camadas;
-- Delegar responsabilidades específicas para cada parte do seu app;
-- Melhorar manutenibilidade e reusabilidade do seu código;
-- Entender e aplicar os padrões REST;
-- Escrever assinaturas para APIs intuitivas e facilmente entendíveis.
+---
 
-## O que foi desenvolvido
+## 🎯 Destaques do Projeto
 
-Uma API Rest trata-se de um sistema de gerenciamento de vendas, onde será possível criar, visualizar, deletar e atualizar produtos e vendas.
-> Arquivos `migration.sql`, `seed.sql` e `docker-compose.yml` fornecidos pela Trybe.
-## Variáveis de Ambiente
+- **Arquitetura em Camadas (MSC)**: Separação estrita de responsabilidades entre Controladores, Serviços de Domínio e Camada de Acesso a Dados.
+- **Tipagem Estrita com TypeScript**: Contratos definidos com interfaces, DTOs e tipagem segura do Prisma Client gerado em tempo de compilação.
+- **Transações Atômicas com Prisma (`$transaction`)**: O cadastro e atualização de vendas garantem que itens não fiquem órfãos em caso de falha transitória de banco de dados.
+- **Tratamento Centralizado de Erros**: Middleware global com classes de exceção HTTP semânticas (`NotFoundError`, `BadRequestError`, `UnprocessableEntityError`).
+- **Swagger UI Interativo**: Documentação completa acessível em `/api-docs` para testes manuais sem necessidade de instalar extensões de cliente HTTP.
+- **Pronto para a Nuvem**: Configurado para deploy gratuito no **Render.com** com SQLite embutido e seed automático.
+- **Integração Contínua (CI)**: Pipeline automatizado no GitHub Actions validando tipagem estática e testes a cada `push`.
 
-Para rodar esse projeto, atente-se as variáveis de ambiente no seu .env. Existe um arquivo `.env.example` com as instruções de configurações.
+---
 
-## Instruções para instalar e rodar
+## 🏛️ Arquitetura e Modelagem
 
-1. Clone o repo:
-```
-  git clone git@github.com:Ludson96/project-store-manager.git
-```
-2. Já existe um arquivo docker-compose.yml. Bastando usar o comando docker-compose up para rodar o MySQL e o Node pelo docker. Execute os services do docker: `node` e `db` 
-```
-  docker-compose up -d
-```
-3. Os arquivos para criação das tabelas e de seed se encontram nos arquivos migration.sql e seed.sql respectivamente. E podem ser utilizados em alguma ferramenta de gerenciamento de bancos de dados (como DBeaver, Extensão no VSCode MySQL ou MySQL Workbench). Entre no container node (renomeado para store_manager):
-```
-  docker exec -it store_manager bash
-```
-4. Instale as suas dependências:
-```
-  npm install
-```
-5. Execute o servidor:
+O modelo de dados contempla o relacionamento N:M entre **Produtos** e **Vendas**, mantendo integridade referencial com ações de exclusão em cascata:
 
-```
-  npm start
-```
-Outra forma de executar é utilizando o `nodemom` (permite fazer alteração em tempo real sem precisar derrubar o servidor e iniciá-lo novamente):
-```
-  npm run debug
-```
-6. Utilizar alguma Plataforma de API para acessar os endpoints e fazer seus devidos experimentos. Exemplos: Postman e Insomnia.
+```mermaid
+erDiagram
+    PRODUCT ||--o{ SALE_PRODUCT : "contido em"
+    SALE ||--|{ SALE_PRODUCT : "possui"
 
-
-## Diagrama
-
-![Diagrama de relacionamentos das tabelas](diagrama.png)
-
-> _Imagem disponibilizada pela Trybe_
-
-## Usage
-
-Since this is a simple back-end project, there's no front-end.
-Using `StoreManager` DB (`migration.sql` and `seed.sql`).
-
-<details>
-
-### Products Route
-
-#### GET `/products`
-- Lists all products in the format:
-```json
-[
-  {
-    "id": 1,
-    "name": "Thor's Hammer"
-  },
-  {
-    "id": 2,
-    "name": "Ion Cannon"
-  }
-  /* ... */
-]
-```
-
-#### GET `/products/:id`
-- Takes a number parameter, and, if the id is an existing product, will return the info:
-```json
-{
-  "id": 1,
-  "name": "Thor's Hammer"
-}
-```
-
-#### GET `/products/search`
-- The query param should follow the format:
-```
-  /products/search?q=hammer
-```
-- If there's a corresponding item, the response will be like:
-```json
-[
-  {
-    "id": 1,
-    "name": "Thor's Hammer"
-  }
-]
-```
-- If there's no parameter, the response will return all of the products:
-```json
-[
-  {
-    "id": 1,
-    "name": "Thor's Hammer"
-  },
-  {
-    "id": 2,
-    "name": "Ion Cannon"
-  }
-  /* ... */
-]
-```
-
-#### POST `/products`
-- Creates a new product.
-- The product name must have at least 5 characters and the body should have the following format:
-```json
-{
-  "name": "Product Name"
-}
-```
-- If the product is successfully created, the response should be like:
-```json
-{
-  "id": 4,
-  "name": "Product Name"
-}
-```
-
-#### PUT `/products/:id`
-- Takes a number parameter, and updates the product, if it exists
-- The body should follow the format:
-```json
-{
-  "name": "Loki's Hammer"
-}
-```
-- When successfully updating, the response should be like:
-```json
-{
-  "id": 1,
-  "name": "Loki's Hammer"
-}
-```
-
-#### DELETE `/products/:id`
-- Takes a number parameter, and deletes the product, if it exists
-- Will return a HTTP `204` status if the product is deleted.
-
-### Sales Route
-
-#### GET `/sales`
-- Lists all sales in the format:
-```json
-[
-  {
-    "saleId": 1,
-    "date": "2022-11-11T04:54:29.000Z",
-    "productId": 1,
-    "quantity": 10
-  },
-  {
-    "saleId": 1,
-    "date": "2022-11-11T04:54:54.000Z",
-    "productId": 2,
-    "quantity": 10
-  }
-  /* ... */
-]
-```
-
-#### GET `/sales/:id`
-- Takes a number parameter, and, if the id is an existing sale, will return the info:
-```json
-[
-  {
-    "date": "2022-11-11T04:54:29.000Z",
-    "productId": 1,
-    "quantity": 10
-  },
-  {
-    "date": "2022-11-11T04:54:54.000Z",
-    "productId": 2,
-    "quantity": 10
-  }
-  /* ... */
-]
-```
-
-#### POST `/sales`
-- Creates a new sale
-- The body should have the following format:
-```json
-[
-  {
-    "productId": 1,
-    "quantity": 10
-  },
-  {
-    "productId": 2,
-    "quantity": 1
-  }
-]
-```
-- If the sale is successfully created, the response should be like:
-```json
-{
-  "id": 3,
-  "itemsSold": [
-    {
-      "productId": 1,
-      "quantity": 10
-    },
-    {
-      "productId": 2,
-      "quantity": 1
+    PRODUCT {
+        int id PK
+        string name
     }
-  ]
-}
-```
 
-#### PUT `/sales/:id`
-- Takes a number parameter, and updates the sale, if it exists
-- The body should follow the format:
-```json
-[
-  {
-    "productId": 1,
-    "quantity": 5
-  },
-  {
-    "productId": 2,
-    "quantity": 3
-  }
-]
-```
-- When successfully updating, the response should be like:
-```json
-{
-  "saleId": 1,
-  "itemsUpdated": [
-    {
-      "productId": 1,
-      "quantity": 5
-    },
-    {
-      "productId": 2,
-      "quantity": 3
+    SALE {
+        int id PK
+        datetime date
     }
-  ]
-}
+
+    SALE_PRODUCT {
+        int sale_id FK
+        int product_id FK
+        int quantity
+    }
 ```
 
-#### DELETE `/sales/:id`
-- Takes a number parameter, and deletes the sale, if it exists
-- Will return a HTTP `204` status if the sale is successfully deleted.
- </details>
+---
 
-[JavaScript-logo]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
-[JavaScript-url]: https://www.javascript.com/
-[NodeJS-logo]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
-[NodeJS-url]: https://nodejs.org/en/
-[Docker-logo]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
-[Docker-url]: https://www.docker.com
-[MySQL-logo]: https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white
-[MySQL-url]: https://www.mysql.com
-[Express-logo]: https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB
-[Express-url]: https://expressjs.com
-[Mocha-logo]: https://img.shields.io/badge/-mocha-%238D6748?style=for-the-badge&logo=mocha&logoColor=white
-[Mocha-url]: https://mochajs.org
-[Nodemon-logo]: https://img.shields.io/badge/Nodemon-76D04B?logo=nodemon&logoColor=fff&style=for-the-badge
-[Nodemon-url]: https://www.npmjs.com/package/nodemon
-[ESLint-logo]: https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white
-[ESLint-url]: https://eslint.org/
-[Chai-logo]: https://img.shields.io/badge/Chai-A30701?logo=chai&logoColor=fff&style=for-the-badge
-[Chai-url]: https://www.chaijs.com
+## 🚀 Endpoints da API
+
+A documentação interativa completa com schemas de payload e respostas está disponível na rota `/api-docs`.
+
+| Método | Endpoint | Descrição | Status Sucesso |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/health` | Healthcheck da API e conectividade com banco | `200 OK` |
+| `GET` | `/api-docs` | Interface Swagger UI | `200 OK` |
+| `GET` | `/products` | Lista todos os produtos cadastrados | `200 OK` |
+| `GET` | `/products/:id` | Retorna um produto por ID | `200 OK` |
+| `GET` | `/products/search?q=:termo` | Busca produtos pelo nome | `200 OK` |
+| `POST` | `/products` | Cadastra um novo produto | `201 Created` |
+| `PUT` | `/products/:id` | Atualiza o nome de um produto | `200 OK` |
+| `DELETE` | `/products/:id` | Remove um produto | `204 No Content` |
+| `GET` | `/sales` | Lista todas as vendas e itens vendidos | `200 OK` |
+| `GET` | `/sales/:id` | Retorna detalhes de uma venda por ID | `200 OK` |
+| `POST` | `/sales` | Registra uma nova venda (transação atômica) | `201 Created` |
+| `PUT` | `/sales/:id` | Atualiza itens de uma venda | `200 OK` |
+| `DELETE` | `/sales/:id` | Remove uma venda e seus itens associados | `204 No Content` |
+
+---
+
+## 🛠️ Como Executar Localmente
+
+### Pré-requisitos
+- **Node.js** >= 18.x (recomendado Node 20 LTS)
+- **npm** >= 9.x
+
+### Passo a Passo
+
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/Ludson96/project-store-manager.git
+   cd project-store-manager
+   ```
+
+2. **Instale as dependências:**
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+
+3. **Configure as variáveis de ambiente:**
+   ```bash
+   cp .env.example .env
+   ```
+   *Por padrão, o projeto vem configurado para **MySQL**. Caso queira testar localmente em modo SQLite idêntico ao Render, basta descomentar a linha do SQLite no `.env`.*
+
+4. **Prepare o banco de dados e dados iniciais (Seed):**
+   - Para **MySQL** (com seu container ou servidor local ativo):
+     ```bash
+     npm run setup:db
+     ```
+   - Para **SQLite** (Modo Demonstração):
+     ```bash
+     npm run setup:sqlite
+     ```
+
+5. **Inicie o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+
+6. **Acesse:**
+   - 📖 Swagger Docs: `http://localhost:3001/api-docs`
+   - 🩺 Healthcheck: `http://localhost:3001/health`
+
+---
+
+## 🐳 Execução via Docker (MySQL + API)
+
+Você pode subir tanto o banco **MySQL 8.0** quanto a API juntos via Docker Compose com apenas um comando:
+
+```bash
+docker-compose up --build -d
+```
+Isso inicializará:
+- Container `store_manager_mysql` na porta `3306` com volume persistente.
+- Container `store_manager_api` na porta `3001` conectado ao MySQL.
+
+---
+
+## 🧪 Suíte de Testes
+
+Os testes automatizados utilizam **Jest** e **Supertest**, cobrindo o fluxo ponta a ponta (rotas, middlewares, controllers e banco de dados real SQLite):
+
+```bash
+# Executa todos os testes
+npm test
+
+# Executa os testes com relatório de cobertura
+npm run test:coverage
+```
+
+---
+
+## 🌐 Como Fazer Deploy no Render.com Gratuitamente
+
+Graças ao uso do **SQLite** com **Prisma**, este projeto pode ser hospedado no Render sem nenhum custo:
+
+1. Suba o repositório no seu GitHub.
+2. Acesse o [Render Dashboard](https://dashboard.render.com/) e clique em **New +** -> **Blueprint**.
+3. Conecte o repositório: o Render lerá automaticamente o arquivo `render.yaml`.
+4. Clique em **Apply**: a aplicação fará o build do TypeScript, executará a migração e o seed do SQLite e subirá a API com Swagger público!
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Ludson**  
+- GitHub: [@Ludson96](https://github.com/Ludson96)
+- LinkedIn: [Ludson](https://linkedin.com)

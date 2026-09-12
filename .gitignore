@@ -292,5 +292,8 @@ $RECYCLE.BIN/
 
 coverage
 .nyc*
-thunder-tests/thunderActivity.json
-thunder-tests/thunderActivity.json
+dist
+*.db
+*.db-journal
+.env
+
