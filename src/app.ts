@@ -17,8 +17,12 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Rota de Healthcheck do Sistema
 app.use('/health', healthRouter);
 
-// Compatibilidade retroativa para testes que buscam GET /
-app.get('/', (_req, res) => {
+// Redirecionamento amigável da rota raiz para o Swagger UI (/api-docs)
+app.get('/', (req, res) => {
+  if (req.accepts('html')) {
+    res.redirect('/api-docs');
+    return;
+  }
   res.status(200).json({
     message: 'Store Manager API is running!',
     documentation: '/api-docs',

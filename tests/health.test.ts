@@ -12,8 +12,15 @@ describe('Health & Root Endpoints', () => {
     expect(response.body).toHaveProperty('timestamp');
   });
 
-  it('GET / should return 200 with documentation link', async () => {
-    const response = await request(app).get('/');
+  it('GET / should redirect browser to /api-docs', async () => {
+    const response = await request(app).get('/').set('Accept', 'text/html');
+
+    expect(response.status).toBe(302);
+    expect(response.headers.location).toBe('/api-docs');
+  });
+
+  it('GET / should return 200 with documentation link when requesting json', async () => {
+    const response = await request(app).get('/').set('Accept', 'application/json');
 
     expect(response.status).toBe(200);
     expect(response.body.documentation).toBe('/api-docs');
