@@ -25,11 +25,9 @@ jobs:
 
       - name: Generate Prisma Client & Push DB
         run: |
-          npx prisma generate
-          npx prisma db push
+          npx prisma generate --schema=./prisma/schema.sqlite.prisma
+          npx prisma db push --schema=./prisma/schema.sqlite.prisma
           npx tsx prisma/seed.ts
-        env:
-          DATABASE_URL: 'file:./prisma/store.db'
 
       - name: Run TypeScript Build
         run: npm run build

@@ -135,7 +135,7 @@ flowchart TD
     Transaction --> PrismaClient
     PrismaClient -.->|Ambiente Local / Docker| MySQL
     PrismaClient -.->|Deploy Nuvem / Testes| SQLite
-    Service -.->|Exceções (400, 404, 422)| ErrorMW
+    Service -.->|"Exceções: 400, 404, 422"| ErrorMW
     ErrorMW -->|Resposta Padronizada JSON| ClientApp
 ```
 
