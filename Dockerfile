@@ -13,6 +13,10 @@ COPY prisma ./prisma/
 RUN npm install --legacy-peer-deps
 RUN npx prisma generate --schema=./prisma/schema.sqlite.prisma
 
+# Cria o arquivo SQLite store.db com o schema e popula o seed durante o build
+RUN npx prisma db push --schema=./prisma/schema.sqlite.prisma
+RUN npx tsx prisma/seed.ts
+
 COPY src ./src
 RUN npm run build
 
@@ -35,7 +39,8 @@ COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/store.db ./prisma/store.db
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "./node_modules/.bin/prisma db push --schema=./prisma/schema.sqlite.prisma && node dist/server.js"]
+CMD ["node", "dist/server.js"]
